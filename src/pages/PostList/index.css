@@ -25,16 +25,21 @@
   background-color: hsl(237, 63%, 56%);
 }
 
+.PostList ul {
+  padding-inline-start: 0px;
+}
+
 .PostList {
   padding: 40px;
 }
 
 .list-container {
-  height: 40px;
+  min-height: 40px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 
   background-color: #f9f9f9;
   border-radius: 4px;
