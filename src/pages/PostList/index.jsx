@@ -3,7 +3,7 @@ import {
   deletePost,
   getAllPosts,
 } from "../../../../react-router-dom-app/src/apis/posts"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { createPortal } from "react-dom"
 import "./index.css"
 
@@ -13,6 +13,7 @@ export default function PostList() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [visibleCount, setVisibleCount] = useState(10)
   const sentinelRef = useRef(null)
+  const nav = useNavigate()
 
   useEffect(() => {
     getAllPosts().then((res) => {
@@ -62,11 +63,22 @@ export default function PostList() {
       <h2>Post Lists</h2>
       <ul>
         {visiblePosts.map((post) => (
-          <li className="list-container" key={post.id}>
-            <Link to={`/posts/${post.id}`}>
+          <li
+            className="list-container"
+            key={post.id}
+            onClick={() => nav(`/posts/${post.id}`)}
+            style={{ cursor: "pointer" }}>
+            <div>
               {post.id}. {post.title}
-            </Link>
-            <button onClick={() => setOpenModal(post.id)}>Delete</button>
+            </div>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation() // 부모 클릭 막기
+                setOpenModal(post.id)
+              }}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
@@ -110,7 +122,7 @@ export default function PostList() {
                   transition: "all 0.7s",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor = "#646cff")
+                  (e.currentTarget.style.backgroundColor = "hsl(237, 63%, 56%)")
                 }
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.backgroundColor =
