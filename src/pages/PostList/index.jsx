@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   deletePost,
   getAllPosts,
@@ -11,12 +11,35 @@ export default function PostList() {
   const [posts, setPosts] = useState([])
   const [openModal, setOpenModal] = useState(null)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(10)
+  const sentinelRef = useRef(null)
 
   useEffect(() => {
     getAllPosts().then((res) => {
       setPosts(res)
     })
   }, [])
+
+  useEffect(() => {
+    if (!sentinelRef.current || visibleCount >= posts.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisibleCount((prev) => prev + 10)
+        } else {
+          console.log(entries)
+        }
+      },
+      { root: null, rootMargin: "100px", threshold: 0.1 }
+    )
+
+    observer.observe(sentinelRef.current)
+
+    return () => observer.disconnect()
+  }, [visibleCount, posts.length])
+
+  const visiblePosts = posts.slice(0, visibleCount)
 
   const handleDelete = async () => {
     if (openModal === null) return
@@ -38,7 +61,7 @@ export default function PostList() {
     <div>
       <h2>Post Lists</h2>
       <ul>
-        {posts.map((post) => (
+        {visiblePosts.map((post) => (
           <li key={post.id}>
             <Link to={`/posts/${post.id}`}>
               {post.id}. {post.title}
@@ -47,6 +70,7 @@ export default function PostList() {
           </li>
         ))}
       </ul>
+      <div ref={sentinelRef}></div>
 
       {openModal !== null &&
         createPortal(
