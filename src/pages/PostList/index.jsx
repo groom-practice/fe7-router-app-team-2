@@ -1,59 +1,62 @@
-import { useEffect, useRef, useState } from "react";
-import { deletePost, getAllPosts } from "../../apis/posts-api";
-import { useNavigate } from "react-router-dom";
-import { createPortal } from "react-dom";
-import "./index.css";
+import { useEffect, useRef, useState } from "react"
+import {
+  deletePost,
+  getAllPosts,
+} from "../../../../react-router-dom-app/src/apis/posts"
+import { useNavigate } from "react-router-dom"
+import { createPortal } from "react-dom"
+import "./index.css"
 
 export default function PostList() {
-  const [posts, setPosts] = useState([]);
-  const [openModal, setOpenModal] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(10);
-  const sentinelRef = useRef(null);
-  const nav = useNavigate();
+  const [posts, setPosts] = useState([])
+  const [openModal, setOpenModal] = useState(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(10)
+  const sentinelRef = useRef(null)
+  const nav = useNavigate()
 
   useEffect(() => {
     getAllPosts().then((res) => {
-      setPosts(res);
-    });
-  }, []);
+      setPosts(res)
+    })
+  }, [])
 
   useEffect(() => {
-    if (!sentinelRef.current || visibleCount >= posts.length) return;
+    if (!sentinelRef.current || visibleCount >= posts.length) return
 
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setVisibleCount((prev) => prev + 10);
+          setVisibleCount((prev) => prev + 10)
         } else {
-          console.log(entries);
+          console.log(entries)
         }
       },
       { root: null, rootMargin: "100px", threshold: 0.1 }
-    );
+    )
 
-    observer.observe(sentinelRef.current);
+    observer.observe(sentinelRef.current)
 
-    return () => observer.disconnect();
-  }, [visibleCount, posts.length]);
+    return () => observer.disconnect()
+  }, [visibleCount, posts.length])
 
-  const visiblePosts = posts.slice(0, visibleCount);
+  const visiblePosts = posts.slice(0, visibleCount)
 
   const handleDelete = async () => {
-    if (openModal === null) return;
+    if (openModal === null) return
 
-    setIsDeleting(true);
+    setIsDeleting(true)
 
     try {
-      await deletePost(openModal);
-      setPosts((prev) => prev.filter((p) => p.id !== openModal));
+      await deletePost(openModal)
+      setPosts((prev) => prev.filter((p) => p.id !== openModal))
     } catch (err) {
-      console.log("Failed to delete post:", err);
+      console.log("Failed to delete post:", err)
     } finally {
-      setIsDeleting(false);
-      setOpenModal(null);
+      setIsDeleting(false)
+      setOpenModal(null)
     }
-  };
+  }
 
   return (
     <div className="PostList">
@@ -64,18 +67,16 @@ export default function PostList() {
             className="list-container"
             key={post.id}
             onClick={() => nav(`/posts/${post.id}`)}
-            style={{ cursor: "pointer" }}
-          >
+            style={{ cursor: "pointer" }}>
             <div>
               {post.id}. {post.title}
             </div>
 
             <button
               onClick={(e) => {
-                e.stopPropagation(); // 부모 클릭 막기
-                setOpenModal(post.id);
-              }}
-            >
+                e.stopPropagation() // 부모 클릭 막기
+                setOpenModal(post.id)
+              }}>
               Delete
             </button>
           </li>
@@ -107,8 +108,7 @@ export default function PostList() {
                     "var(--button-link-color)")
                 }
                 onClick={handleDelete}
-                disabled={isDeleting}
-              >
+                disabled={isDeleting}>
                 YES
               </button>
               <button
@@ -129,8 +129,7 @@ export default function PostList() {
                     "var(--button-link-color)")
                 }
                 onClick={() => setOpenModal(null)}
-                disabled={isDeleting}
-              >
+                disabled={isDeleting}>
                 NO
               </button>
             </div>
@@ -138,5 +137,5 @@ export default function PostList() {
           document.body
         )}
     </div>
-  );
+  )
 }
