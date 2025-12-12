@@ -35,7 +35,7 @@ export default function Bookmark() {
 
   return (
     <div>
-      <h1>즐겨찾기</h1>
+      <h1 style={{ paddingLeft: 40 }}>즐겨찾기</h1>
 
       {posts.length === 0 && <p>즐겨찾기한 게시물이 없습니다.</p>}
 
