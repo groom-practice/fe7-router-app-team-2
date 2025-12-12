@@ -55,7 +55,9 @@ export default function PostDetail() {
         >
           Edit
         </button>
-        <button onClick={handleBookmark}>즐겨찾기</button>
+        <button className={style.button} onClick={handleBookmark}>
+          즐겨찾기
+        </button>
       </div>
     </div>
   );
