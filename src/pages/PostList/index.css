@@ -1,3 +1,56 @@
+.PostList a {
+  color: black;
+  text-decoration: none;
+}
+
+.PostList h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 20px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ddd;
+}
+
+.PostList button {
+  background-color: var(--button-link-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.7s;
+}
+
+.PostList button:hover {
+  background-color: hsl(237, 63%, 56%);
+}
+
+.PostList {
+  padding: 40px;
+}
+
+.list-container {
+  height: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px #0000001a;
+
+  margin-bottom: 20px;
+  padding: 10px;
+
+  transition: all 0.7s;
+}
+
+.list-container:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
 .modal-background {
   position: fixed;
   inset: 0;
@@ -8,7 +61,10 @@
 }
 
 .modal-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   background-color: white;
-  padding: 20px;
+  padding: 40px;
   border-radius: 5px;
 }

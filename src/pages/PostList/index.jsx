@@ -58,11 +58,11 @@ export default function PostList() {
   }
 
   return (
-    <div>
+    <div className="PostList">
       <h2>Post Lists</h2>
       <ul>
         {visiblePosts.map((post) => (
-          <li key={post.id}>
+          <li className="list-container" key={post.id}>
             <Link to={`/posts/${post.id}`}>
               {post.id}. {post.title}
             </Link>
@@ -76,11 +76,48 @@ export default function PostList() {
         createPortal(
           <div className="modal-background">
             <div className="modal-content">
-              <strong>정말로 id={openModal} 포스트를 삭제하시겠습니까?</strong>
-              <button onClick={handleDelete} disabled={isDeleting}>
+              <div>정말로 id={openModal} 포스트를 삭제하시겠습니까?</div>
+
+              <button
+                style={{
+                  backgroundColor: "var(--button-link-color)",
+                  color: "#fff",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  transition: "all 0.7s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "hsl(237, 63%, 56%)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor =
+                    "var(--button-link-color)")
+                }
+                onClick={handleDelete}
+                disabled={isDeleting}>
                 YES
               </button>
-              <button onClick={() => setOpenModal(null)} disabled={isDeleting}>
+              <button
+                style={{
+                  backgroundColor: "var(--button-link-color)",
+                  color: "#fff",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  transition: "all 0.7s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "#646cff")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor =
+                    "var(--button-link-color)")
+                }
+                onClick={() => setOpenModal(null)}
+                disabled={isDeleting}>
                 NO
               </button>
             </div>
