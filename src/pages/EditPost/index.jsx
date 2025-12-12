@@ -22,6 +22,8 @@ export default function EditPost() {
       })
       .catch((err) => {
         console.error("Failed to fetch post:", err);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, [id]);
@@ -39,7 +41,8 @@ export default function EditPost() {
     } catch (err) {
       console.error("Failed to update post:", err);
       alert("수정 실패!");
-      setIsSaving(false);
+    } finally {
+      setIsSaving(false); // finally로 이동
     }
   };
 
