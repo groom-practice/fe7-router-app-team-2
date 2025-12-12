@@ -1,5 +1,5 @@
 import { Outlet, Link, useNavigate } from "react-router-dom"
-import './Layout.css';
+import "./Layout.css"
 
 export default function Layout() {
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ export default function Layout() {
           <button onClick={() => navigate(-1)}>BACK</button>
         </nav>
         <Outlet />
-      </div> 
+      </div>
     </div>
   )
 }
