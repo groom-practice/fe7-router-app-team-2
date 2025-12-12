@@ -1,4 +1,46 @@
-const API_URL = "https://jsonplaceholder.typicode.com/posts";
+
+const API_URL = "https://jsonplaceholder.typicode.com/posts"
+
+export async function getAllPosts() {
+  const res = await fetch(API_URL)
+  return res.json()
+}
+
+export async function getPostById(id) {
+  const res = await fetch(`${API_URL}/${id}`)
+  return res.json()
+}
+
+export async function createPost(data) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+
+  return res.json()
+}
+
+export async function updatePost(id, data) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+
+  return res.json()
+}
+
+export async function deletePost(id) {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  })
+
+  return res.ok
 
 export async function fetchDetailData(id) {
   const response = await fetch(`${API_URL}/${id}`);
@@ -6,4 +48,5 @@ export async function fetchDetailData(id) {
     throw new Error("Failed to fetch post");
   }
   return await response.json();
+
 }
