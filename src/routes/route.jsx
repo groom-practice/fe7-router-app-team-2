@@ -5,6 +5,7 @@ import PostList from "../pages/PostList";
 import PostDetail from "../pages/PostDetail";
 import EditPost from "../pages/EditPost";
 import Layout from "../layout/Layout";
+import Bookmark from "../pages/Bookmark";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "posts", element: <PostList /> },
       { path: "posts/:id", element: <PostDetail /> },
       { path: "posts/:id/edit", element: <EditPost /> },
+      { path: "bookmark", element: <Bookmark /> },
     ],
   },
 ]);

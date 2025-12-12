@@ -1,22 +1,22 @@
 .layout {
-    height: 100%;
+  height: 100%;
 }
 
 .header {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 0 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: left;
-    position: fixed;
-    width: 100%;
-    height: 80px;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 2px solid #2f5cff;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid #2f5cff;
 }
 
 .header > h1 {
@@ -32,13 +32,13 @@
 }
 
 .side {
-    border-right: 2px solid #2f5cff;
+  border-right: 2px solid #2f5cff;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  width: 100px;
-  height: 100%;
+  width: 130px;
+  height: 100vh;
   background-color: #f8f8f8;
   border-right: 1px solid #e0e0e0;
   padding: 0 20px;

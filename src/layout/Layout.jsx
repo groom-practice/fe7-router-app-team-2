@@ -1,8 +1,8 @@
-import { Outlet, Link, useNavigate } from "react-router-dom"
-import './Layout.css';
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import "./Layout.css";
 
 export default function Layout() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="main">
@@ -14,10 +14,11 @@ export default function Layout() {
         <nav className="side">
           <Link to="/">HOME</Link>
           <Link to="/posts">POSTS</Link>
+          <Link to="/bookmark">즐겨찾기</Link>
           <button onClick={() => navigate(-1)}>BACK</button>
         </nav>
         <Outlet />
-      </div> 
+      </div>
     </div>
-  )
+  );
 }
