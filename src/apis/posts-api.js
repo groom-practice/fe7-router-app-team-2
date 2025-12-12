@@ -10,18 +10,6 @@ export async function getPostById(id) {
   return res.json()
 }
 
-export async function createPost(data) {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-
-  return res.json()
-}
-
 export async function updatePost(id, data) {
   const res = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
