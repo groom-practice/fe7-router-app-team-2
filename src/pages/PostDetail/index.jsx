@@ -36,6 +36,7 @@ export default function PostDetail() {
     if (!bookmark.includes(id)) {
       const updated = [...bookmark, id];
       localStorage.setItem("bookmark", JSON.stringify(updated));
+      alert("즐겨찾기에 추가되었습니다!");
     } else {
       alert("이미 즐겨찾기 중 입니다!");
     }
