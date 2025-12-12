@@ -47,6 +47,5 @@ export async function fetchDetailData(id) {
   if (!response.ok) {
     throw new Error("Failed to fetch post")
   }
-
   return await response.json()
 }
