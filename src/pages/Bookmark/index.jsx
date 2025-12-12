@@ -4,6 +4,7 @@ import { getAllPosts } from "../../apis/posts-api";
 
 export default function Bookmark() {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [bookmarkIds, setBookmarkIds] = useState(
     JSON.parse(localStorage.getItem("bookmark") || "[]")
   );
@@ -11,6 +12,7 @@ export default function Bookmark() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await getAllPosts();
         const filteredPosts = response.filter((item) =>
@@ -19,6 +21,8 @@ export default function Bookmark() {
         setPosts(filteredPosts);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -32,6 +36,8 @@ export default function Bookmark() {
     setBookmarkIds(deleted_bookmarks);
     setPosts((prev) => prev.filter((post) => post.id !== id));
   }
+
+  if (isLoading) return <div>로딩중...</div>;
 
   return (
     <div>
